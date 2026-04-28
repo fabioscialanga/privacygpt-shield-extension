@@ -39,9 +39,9 @@ Guarda il video dimostrativo completo:
 
 <div align="center">
 
-[![Guarda il video demo](assets/github_banner.png)](docs/privacygpt_shield_v33_demo.mp4)
+[![Guarda il video demo](assets/github_banner.png)](assets/privacygpt_shield_v33_demo.mp4)
 
-👉 **[Apri il video demo MP4](docs/privacygpt_shield_v33_demo.mp4)**
+👉 **[Apri il video demo MP4](assets/privacygpt_shield_v33_demo.mp4)**
 
 </div>
 
