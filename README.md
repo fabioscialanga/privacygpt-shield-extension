@@ -1,298 +1,249 @@
-<div align="center">
+# Guida installazione PrivacyGPT Shield Extension V3.3
 
-![PrivacyGPT Shield Banner](assets/github_banner.png)
+Questa guida spiega come installare **PrivacyGPT Shield Extension V3.3** in Google Chrome usando la modalità sviluppatore.
 
-# 🔒 PrivacyGPT Shield Extension V3.3
+PrivacyGPT Shield è una estensione Chrome locale pensata per aiutarti ad anonimizzare dati sensibili prima dell'invio di prompt a ChatGPT.
 
-### Anonimizza dati sensibili prima di inviare prompt a ChatGPT
+## Requisiti
 
-**Una estensione Chrome locale, leggera e controllabile, pensata per professionisti, consulenti e aziende che lavorano con testi riservati.**
+Prima di iniziare assicurati di avere:
 
-<br>
+- Google Chrome installato
+- il repository scaricato o clonato sul computer
+- la cartella del progetto estratta se hai scaricato uno ZIP
 
-![Version](https://img.shields.io/badge/version-3.3-blue?style=for-the-badge)
-![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)
-![Privacy First](https://img.shields.io/badge/Privacy-Local%20Only-0f172a?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+## Regola fondamentale
 
-<br>
+Quando Chrome ti chiede quale cartella caricare, devi selezionare **la cartella che contiene il file `manifest.json`**.
 
-**Ideato e sviluppato da Fabio Scialanga**
+Il nome della cartella può essere diverso, per esempio:
 
-</div>
+```text
+privacygpt-shield-extension
+```
 
----
+oppure:
 
-## 🚀 Perché nasce PrivacyGPT Shield
+```text
+PrivacyGPT_Shield_V3_3
+```
 
-Quando lavori con ChatGPT capita spesso di incollare email, contratti, ticket, documenti tecnici o conversazioni che contengono dati sensibili.
+Il nome non è importante. È importante che dentro la cartella ci sia questo file:
 
-PrivacyGPT Shield nasce per ridurre questo rischio: prima dell'invio, l'estensione può anonimizzare automaticamente o manualmente informazioni come nomi, email, telefoni, indirizzi, aziende, URL, IP, IBAN, codici fiscali, partite IVA e credenziali tecniche evidenti.
+```text
+manifest.json
+```
 
-> **PrivacyGPT Shield elabora il testo localmente nel browser. Non invia i contenuti a server esterni.**
+Non selezionare:
 
----
+- il file ZIP
+- una cartella superiore
+- la cartella `docs`
+- la cartella `assets`
+- eventuali cartelle di appoggio o distribuzione
 
-## 🎬 Demo video
+## Installazione da GitHub
 
-Guarda il video dimostrativo completo:
+### 1. Scarica il repository
 
-<div align="center">
+Apri la pagina GitHub del progetto e clicca:
 
-[![Guarda il video demo](assets/github_banner.png)](assets/privacygpt_shield_v33_demo.mp4)
+```text
+Code > Download ZIP
+```
 
-👉 **[Apri il video demo MP4](assets/privacygpt_shield_v33_demo.mp4)**
+In alternativa puoi clonare il repository con Git.
 
-</div>
+### 2. Estrai lo ZIP
 
----
-
-## ✨ Demo visuali
-
-### Installazione
-
-La GIF seguente mostra come installare PrivacyGPT Shield in Chrome in modalità sviluppatore.
-
-![Installazione PrivacyGPT Shield V3.3](docs/installazione_privacygpt_v33.gif)
-
-### Esempio di utilizzo
-
-La GIF seguente mostra il flusso consigliato in modalità manuale.
-
-![Utilizzo PrivacyGPT Shield V3.3](docs/utilizzo_privacygpt_v33.gif)
-
----
-
-## 🧠 Cosa fa
-
-PrivacyGPT Shield intercetta il testo scritto o incollato in ChatGPT e lo anonimizza prima dell'invio.
+Se hai scaricato il file ZIP, estrailo in una cartella locale del tuo computer.
 
 Esempio:
 
 ```text
-Mario Rossi <mario.rossi@example.com>
-Tel: +39 333 1234567
-Azienda Demo S.r.l.
-Via Esempio 10, Roma
+C:\AgentAi\privacygpt-shield-extension
 ```
 
-può diventare:
+### 3. Apri Chrome Extensions
+
+Apri Google Chrome e vai su:
 
 ```text
-[PERSON_1] <[EMAIL_1]>
-Tel: [PHONE_1]
-[COMPANY_1]
-[ADDRESS_1]
+chrome://extensions
 ```
 
----
+### 4. Attiva Modalità sviluppatore
 
-## 🛡️ Funzioni principali
-
-### 1. Modalità anonimizzazione
-
-#### Semplice
-
-Pensata per un uso prudente e con basso rischio di falsi positivi. Maschera soprattutto dati strutturati:
-
-- email
-- URL
-- IP
-- IBAN
-- codice fiscale
-- partita IVA
-- telefoni
-
-#### Legale
-
-Pensata per email, contratti, documenti amministrativi e testi più delicati. Aggiunge controlli più estesi su:
-
-- persone in contesti riconoscibili
-- indirizzi
-- aziende, se l'opzione è attiva
-- date e orari
-- firme email
-- header email come `Da`, `A`, `Cc`, `From`, `To`
-- server, username, password e database in contesti tecnici
-
----
-
-### 2. Modalità intervento
-
-#### Manuale, consigliata
-
-Mostra un pulsante flottante:
+In alto a destra attiva:
 
 ```text
-🔒 Anonimizza
+Modalità sviluppatore
 ```
 
-Il testo viene modificato solo quando l'utente preme il pulsante. Dopo l'anonimizzazione puoi controllare il risultato e inviare manualmente.
+### 5. Carica l'estensione
 
-#### Automatica
-
-Replica il comportamento originario dell'estensione. Quando premi Invio o clicchi il pulsante di invio di ChatGPT, l'estensione prova ad anonimizzare il testo prima dell'invio.
-
----
-
-### 3. Anonimizza aziende
-
-Opzione per mascherare nomi di società, clienti e fornitori.
+Clicca:
 
 ```text
-Azienda Demo S.r.l. → [COMPANY_1]
+Carica estensione non pacchettizzata
 ```
 
----
+### 6. Seleziona la cartella corretta
 
-### 4. Debug overlay
+Seleziona la cartella principale del progetto, cioè quella che contiene:
 
-Mostra un riquadro tecnico nella pagina ChatGPT con:
+```text
+manifest.json
+```
 
-- estensione attiva o meno
-- modalità anonimizzazione
-- modalità intervento
-- editor rilevato
-- numero di pattern trovati
-- ultima azione eseguita
+Esempio corretto:
 
----
+```text
+C:\AgentAi\privacygpt-shield-extension
+```
 
-### 5. Test locale
+Esempi non corretti:
 
-La pagina `test.html` permette di provare il motore senza ChatGPT.
+```text
+C:\AgentAi
+C:\AgentAi\privacygpt-shield-extension\docs
+C:\AgentAi\privacygpt-shield-extension\assets
+PrivacyGPT_Shield_V3_3.zip
+```
+
+### 7. Verifica il caricamento
+
+Dopo il caricamento dovresti vedere l'estensione nella lista delle estensioni Chrome con il nome:
+
+```text
+PrivacyGPT Shield Extension V3.3
+```
+
+Se compare un errore, controlla di aver selezionato la cartella che contiene `manifest.json`.
+
+### 8. Apri ChatGPT
+
+Apri ChatGPT e ricarica la pagina.
+
+L'estensione viene caricata solo dopo il refresh della pagina.
+
+### 9. Configura l'estensione
+
+Clicca sull'icona di PrivacyGPT Shield nella barra delle estensioni di Chrome.
+
+Dal popup puoi scegliere:
+
+- modalità anonimizzazione: **Semplice** o **Legale**
+- modalità intervento: **Manuale** o **Automatica**
+- anonimizza aziende: **ON** o **OFF**
+- debug overlay: **ON** o **OFF**
+
+## Modalità consigliata
+
+Per un utilizzo sicuro e controllabile, la modalità consigliata è:
+
+```text
+Modalità anonimizzazione: Legale
+Modalità intervento: Manuale
+Anonimizza aziende: ON se stai lavorando con clienti, fornitori o documenti riservati
+Debug overlay: OFF durante l'uso normale, ON solo per test
+```
+
+## Come usare la modalità Manuale
+
+In modalità Manuale l'estensione non modifica automaticamente il testo quando premi Invio.
+
+Il flusso consigliato è:
+
+1. scrivi o incolla il testo in ChatGPT
+2. clicca il pulsante **🔒 Anonimizza**
+3. controlla il testo anonimizzato
+4. invia manualmente il messaggio
+
+Questa modalità è consigliata perché ti permette di verificare il risultato prima dell'invio.
+
+## Come usare la modalità Automatica
+
+In modalità Automatica l'estensione prova ad anonimizzare il testo quando:
+
+- premi Invio
+- clicchi il pulsante di invio di ChatGPT
+
+Questa modalità è più veloce, ma meno controllabile. Per documenti lunghi, contratti o email riservate è preferibile la modalità Manuale.
+
+## Test locale
+
+Il progetto include una pagina di test locale:
+
+```text
+test.html
+```
+
+Serve per provare il motore di anonimizzazione senza usare ChatGPT.
+
+Per usarla:
+
+1. apri il popup dell'estensione
+2. clicca **Apri test locale**
+3. premi **Anonimizza**
+4. verifica l'output e il log dei match
 
 Il test locale usa solo dati fittizi e dimostrativi.
 
----
+## Risoluzione problemi
 
-## 📦 Installazione locale
+### L'estensione non si carica
 
-1. Scarica o clona il repository.
-2. Apri Chrome.
-3. Vai su `chrome://extensions`.
-4. Attiva **Modalità sviluppatore**.
-5. Clicca **Carica estensione non pacchettizzata**.
-6. Seleziona la cartella del progetto.
-7. Apri ChatGPT e ricarica la pagina.
-8. Apri il popup dell'estensione e configura le opzioni.
+Controlla di aver selezionato la cartella che contiene `manifest.json`.
 
-Per una guida dettagliata consulta:
+### Il pulsante Anonimizza non compare
 
-👉 [`docs/Guida_Installazione.md`](docs/Guida_Installazione.md)
-
----
-
-## 🧪 Uso consigliato
-
-Il flusso più sicuro è questo:
-
-1. imposta **Modalità: Legale**
-2. imposta **Intervento: Manuale**
-3. attiva **Anonimizza aziende** se il testo contiene clienti, fornitori o partner
-4. incolla il testo in ChatGPT
-5. premi **🔒 Anonimizza**
-6. controlla il testo trasformato
-7. invia manualmente
-
----
-
-## 📁 Struttura del progetto
+Verifica nel popup che la modalità intervento sia impostata su:
 
 ```text
-privacygpt-shield-extension/
-  manifest.json
-  content.js
-  popup.html
-  popup.js
-  rules.js
-  test.html
-  test.js
-  README.md
-  PRIVACY_POLICY.md
-  CHANGELOG.md
-  RELEASE_NOTES_v3.3.0.md
-  LICENSE
-  assets/
-    logo_master.png
-    github_banner.png
-    icon16.png
-    icon32.png
-    icon48.png
-    icon128.png
-  docs/
-    Guida_Installazione.md
-    Guida_GitHub.md
-    Documentazione_Tecnica.md
-    Esempio_Utilizzo.md
-    installazione_privacygpt_v33.gif
-    utilizzo_privacygpt_v33.gif
-    privacygpt_shield_v33_demo.mp4
+Manuale
 ```
 
----
+Poi ricarica ChatGPT.
 
-## 🔐 Privacy
+### L'estensione non modifica il testo
 
-PrivacyGPT Shield:
+Controlla che:
 
-- elabora il testo localmente nel browser
+- l'estensione sia attiva
+- la pagina ChatGPT sia stata ricaricata dopo l'installazione
+- il testo contenga dati riconoscibili dal motore
+- la modalità scelta sia coerente con il tipo di testo
+
+### Il test locale non funziona
+
+Assicurati di non aver aperto direttamente un file dentro lo ZIP.
+
+Devi prima estrarre tutta la cartella del progetto e poi aprire `test.html`.
+
+### Vedo troppi falsi positivi
+
+Usa la modalità **Semplice** oppure disattiva **Anonimizza aziende**.
+
+### Vedo pochi dati anonimizzati
+
+Usa la modalità **Legale** e, se stai lavorando con email o documenti riservati, attiva **Anonimizza aziende**.
+
+## Privacy
+
+PrivacyGPT Shield Extension V3.3 elabora il testo localmente nel browser.
+
+L'estensione:
+
 - non invia il testo a server esterni
 - non usa API esterne
-- salva solo impostazioni locali tramite `chrome.storage.local`
-- non richiede account o login
+- non salva il contenuto dei prompt
+- salva solo le impostazioni locali tramite `chrome.storage.local`
 
-Per i dettagli consulta:
+## Nota importante
 
-👉 [`PRIVACY_POLICY.md`](PRIVACY_POLICY.md)
+PrivacyGPT Shield Extension V3.3 riduce il rischio di esposizione di dati sensibili, ma non garantisce anonimizzazione perfetta in ogni scenario.
 
----
+Per documenti importanti, email lunghe, contratti o testi molto delicati, controlla sempre il risultato prima dell'invio.
 
-## ⚠️ Limiti noti
-
-PrivacyGPT Shield Extension V3.3 usa un motore locale basato su regole e regex.
-
-È utile per ridurre il rischio di esposizione dati, ma non garantisce anonimizzazione perfetta in ogni contesto.
-
-Sono possibili:
-
-- falsi positivi
-- falsi negativi
-- risultati non perfetti su email thread molto lunghe
-- necessità di controllo umano prima dell'invio
-
-Per questo la modalità **Manuale** è consigliata.
-
----
-
-## 🗺️ Roadmap
-
-### V3.3
-
-Versione stabile con motore regex locale, modalità manuale e automatica.
-
-### V4.0
-
-Possibile integrazione opzionale con un motore locale AI separato, basato su PrivacyGPT Local Engine.
-
----
-
-## 👤 Autore
-
-PrivacyGPT Shield Extension V3.3 è stato ideato e sviluppato da **Fabio Scialanga**.
-
----
-
-## 📄 Licenza
-
-Questo progetto include una licenza MIT di esempio. Personalizzala in base alle tue esigenze prima della pubblicazione definitiva.
-
----
-
-<div align="center">
-
-### 🔒 PrivacyGPT Shield Extension V3.3
-
-**Proteggi i dati sensibili prima di dialogare con l'AI.**
-
-</div>
+La modalità Manuale è la scelta consigliata.
