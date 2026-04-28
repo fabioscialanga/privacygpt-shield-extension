@@ -1,65 +1,67 @@
-# Guida GitHub per PrivacyGPT Shield V3.3
+# Guida GitHub PrivacyGPT Shield Extension V3.3
 
-## Obiettivo
-Preparare il progetto per una pubblicazione ordinata e professionale su GitHub.
+## Nome repository consigliato
 
-## Struttura consigliata del repository
+```text
+privacygpt-shield-extension
+```
 
-Mantieni nel repository:
+## Primo caricamento
 
-- codice completo dell'estensione
-- cartella `assets`
-- cartella `docs`
-- README principale
-- licenza
-- eventuale changelog futuro
-
-## Creazione repository
-
-Esempio:
+Dentro la cartella del progetto:
 
 ```bash
 git init
 git add .
-git commit -m "Release PrivacyGPT Shield V3.3"
+git commit -m "Release PrivacyGPT Shield Extension V3.3"
 git branch -M main
-git remote add origin https://github.com/TUO_USERNAME/privacygpt-shield-v3-3.git
+git remote add origin https://github.com/TUO_USERNAME/privacygpt-shield-extension.git
 git push -u origin main
 ```
 
-## Release consigliata
+Sostituisci `TUO_USERNAME` con il tuo username GitHub reale.
 
-### Versione
-`v3.3.0`
+## Aggiornamento di un repository già pubblicato
 
-### Titolo release
-`PrivacyGPT Shield V3.3`
+Se il repository esiste già e devi pubblicare questa nuova versione:
 
-### Allegati consigliati
+```bash
+git status
+git add .
+git commit -m "Update PrivacyGPT Shield Extension V3.3"
+git push origin main
+```
 
-- ZIP del progetto
-- eventualmente screenshot e GIF se vuoi riutilizzarli fuori dal repository
+## Se il remote è sbagliato
 
-## README efficace
+Controlla il remote:
 
-Il README dovrebbe spiegare chiaramente:
+```bash
+git remote -v
+```
 
-- che cos'è il progetto
-- perché è utile
-- come si installa
-- come si usa
-- quali sono le modalità
-- quali limiti ha
-- come contribuire in futuro
+Correggilo così:
 
-## Asset grafici
+```bash
+git remote set-url origin https://github.com/TUO_USERNAME/privacygpt-shield-extension.git
+```
 
-In questa versione sono inclusi:
+Poi fai push:
 
-- logo originale con lucchetto
-- banner per README GitHub
-- GIF animata di installazione
+```bash
+git push -u origin main
+```
 
-## Suggerimento pratico
+## Release GitHub consigliata
 
-Per una prima distribuzione io userei GitHub come canale principale. È la soluzione più semplice e più professionale per condividere codice, documentazione, release e pacchetti ZIP.
+Crea una release con:
+
+- tag: `v3.3.0`
+- titolo: `PrivacyGPT Shield Extension V3.3`
+- allegato: ZIP del progetto
+
+## Descrizione repository consigliata
+
+```text
+Chrome extension for local privacy redaction before sending prompts to ChatGPT.
+```

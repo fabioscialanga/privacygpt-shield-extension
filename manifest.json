@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "PrivacyGPT Shield V3.3",
-  "version": "3.3.3",
-  "description": "Anonimizzazione privacy per ChatGPT con modalità semplice, modalità legale, debug overlay opzionale e supporto migliorato per email thread.",
+  "version": "3.3.1",
+  "description": "Anonimizzazione privacy per ChatGPT con modalità semplice, modalità legale e debug overlay opzionale. Hotfix falsi positivi contratti lunghi.",
   "permissions": [
     "storage",
     "activeTab",

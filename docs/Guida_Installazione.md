@@ -1,75 +1,60 @@
-# Guida installazione PrivacyGPT Shield V3.3
+# Guida installazione PrivacyGPT Shield Extension V3.3
 
 ## Obiettivo
-Installare l'estensione manualmente in Chrome e verificarne il corretto funzionamento.
 
-## Prerequisiti
+Installare l'estensione Chrome in locale e verificarne il funzionamento.
 
-- Google Chrome oppure un browser Chromium compatibile
-- il progetto scaricato in ZIP o clonato da GitHub
-- cartella del progetto estratta localmente
+## Installazione
 
-## Procedura dettagliata
+1. Scarica il pacchetto ZIP oppure clona il repository GitHub.
+2. Se hai scaricato lo ZIP, estrailo in una cartella locale.
+3. Apri Google Chrome.
+4. Vai su `chrome://extensions`.
+5. Attiva **Modalità sviluppatore**.
+6. Clicca **Carica estensione non pacchettizzata**.
+7. Seleziona la cartella `privacygpt-shield-extension` o `PrivacyGPT_Shield_V3_3`.
+8. Verifica che l'estensione compaia nella lista.
+9. Apri ChatGPT e ricarica la pagina.
+10. Apri il popup dell'estensione e scegli le impostazioni.
 
-### 1. Scarica il progetto
-Puoi scegliere una delle due strade:
+## Impostazioni disponibili
 
-- scaricare lo ZIP del repository
-- clonare il repository con Git
+### Attivo
+Abilita o disabilita l'estensione.
 
-### 2. Estrai lo ZIP
-Se hai scaricato il pacchetto ZIP, estrailo in una cartella locale.
+### Modalità anonimizzazione
 
-### 3. Apri la pagina estensioni di Chrome
-Apri Chrome e vai su:
+- **Semplice**: maschera dati strutturati come email, telefoni, URL, IP, IBAN, codici fiscali e partite IVA.
+- **Legale**: aggiunge controlli più ampi per documenti, contratti, firme email e testi sensibili.
 
-`chrome://extensions`
+### Modalità intervento
 
-### 4. Attiva la Modalità sviluppatore
-L'interruttore si trova in alto a destra.
+- **Manuale**: mostra il pulsante `🔒 Anonimizza`. Il testo viene modificato solo quando premi il pulsante.
+- **Automatica**: anonimizza quando premi Invio o clicchi il pulsante di invio di ChatGPT.
 
-### 5. Carica l'estensione
-Clicca su:
+La modalità Manuale è consigliata perché permette di controllare il risultato prima dell'invio.
 
-`Carica estensione non pacchettizzata`
+### Debug overlay
+Mostra informazioni tecniche nella pagina ChatGPT.
 
-### 6. Seleziona la cartella del progetto
-Scegli la cartella:
+### Anonimizza aziende
+Maschera nomi di società, clienti e fornitori.
 
-`PrivacyGPT_Shield_V3_3`
+## Test locale
 
-### 7. Verifica l'installazione
-Dovresti vedere l'estensione nell'elenco di Chrome con il nome **PrivacyGPT Shield V3.3** e il logo con scudo e lucchetto.
+Dal popup puoi cliccare **Apri test locale**. La pagina di test usa dati fittizi e serve a verificare il motore di anonimizzazione senza usare ChatGPT.
 
-### 8. Apri ChatGPT
-Apri ChatGPT e ricarica la pagina dopo l'installazione.
+## Problemi comuni
 
-### 9. Configura il popup
-Dal popup puoi:
+### Il pulsante Anonimizza non compare
+Verifica che:
 
-- attivare o disattivare l'estensione
-- scegliere modalità semplice o legale
-- attivare o disattivare il debug overlay
-- decidere se mascherare anche le aziende
+- l'estensione sia attiva
+- la modalità intervento sia impostata su Manuale
+- la pagina ChatGPT sia stata ricaricata
 
-### 10. Esegui i test
-Puoi usare due strumenti:
+### L'anonimizzazione non parte in automatico
+Verifica che la modalità intervento sia impostata su Automatica.
 
-- `Run diagnostics su ChatGPT`
-- `Apri test locale`
-
-## Verifiche utili
-
-### Se il test locale funziona ma ChatGPT no
-Probabile problema di selezione dell'editor o di cambiamenti nel DOM di ChatGPT.
-
-### Se il test locale non funziona
-Probabile problema nel motore regex di `rules.js`.
-
-### Se non vedi il debug overlay
-Controlla che l'opzione sia attiva e ricarica la pagina.
-
-## GIF animata
-La guida include anche una GIF animata che mostra visivamente i passaggi principali di installazione:
-
-`docs/installazione_privacygpt_v33.gif`
+### Il test locale non funziona
+Apri la console del browser e verifica eventuali errori. In Manifest V3 gli script inline non sono permessi, quindi la logica del test è contenuta nel file `test.js`.

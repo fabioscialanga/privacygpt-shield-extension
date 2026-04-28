@@ -1,76 +1,105 @@
-# PrivacyGPT Shield V3.3
+# PrivacyGPT Shield Extension V3.3
 
 ![PrivacyGPT Shield Banner](assets/github_banner.png)
 
+**PrivacyGPT Shield Extension V3.3** è una estensione Chrome locale per anonimizzare dati sensibili prima dell'invio a ChatGPT.
 
-## Stato versione
+Ideato e sviluppato da **Fabio Scialanga**.
 
-Versione pacchetto: **3.3.1**, hotfix della V3.3.
+## Obiettivo
 
-Questa build corregge i falsi positivi rilevati su contratti lunghi, in particolare i casi in cui termini contrattuali come servizi, definizioni, clienti, software o concetti giuridici venivano erroneamente trasformati in token `[PERSON_N]`.
+L'estensione aiuta a ridurre il rischio di inviare accidentalmente a ChatGPT dati personali, aziendali o tecnici non necessari, come email, telefoni, indirizzi, nomi, aziende, URL, IP e credenziali tecniche evidenti.
 
-**PrivacyGPT Shield V3.3** è una estensione Chrome ideata e sviluppata da **Fabio Scialanga** per aiutare professionisti, consulenti e aziende ad anonimizzare dati sensibili prima dell'invio di prompt a ChatGPT.
+Tutto il processo di anonimizzazione avviene **localmente nel browser**. L'estensione non invia i contenuti a server esterni.
 
-> PrivacyGPT Shield elabora il testo localmente nel browser e non invia i contenuti a server esterni.
+## Funzioni principali
 
-## Obiettivo del progetto
+### Modalità anonimizzazione
 
-Quando si lavora con documenti tecnici, amministrativi, contrattuali o legali, può capitare di incollare in ChatGPT contenuti che contengono dati personali o aziendali. PrivacyGPT Shield nasce per ridurre questo rischio, sostituendo automaticamente i pattern sensibili riconosciuti con token anonimi.
-
-## Versione 3.3.3
-
-Questa build include una hotfix per migliorare il comportamento su email thread lunghe, firme aziendali e header Outlook, senza cablare nomi reali nel sorgente.
-
-## Funzionalità principali
-
-### Modalità semplice
-
-Maschera i dati più evidenti:
+#### Semplice
+Pensata per un uso prudente e a basso rischio di falsi positivi. Maschera soprattutto dati strutturati:
 
 - email
-- numeri di telefono
+- URL
+- IP
 - IBAN
 - codice fiscale
 - partita IVA
-- URL
-- indirizzi IP
+- telefoni
 
-### Modalità legale
+#### Legale
+Pensata per documenti, email, contratti e testi più delicati. Aggiunge controlli più estesi su:
 
-Pensata per contesti contrattuali, legali e amministrativi. Oltre ai dati della modalità semplice, prova a mascherare anche:
-
-- nomi e cognomi
-- date rilevanti
-- date di nascita in contesto
+- persone in contesti riconoscibili
 - indirizzi
-- sedi legali
-- città in contesto sensibile
 - aziende, se l'opzione è attiva
+- date e orari
+- firme email
+- header email come Da, A, Cc
+- server, username, password e database in contesti tecnici
 
-### Debug overlay opzionale
+### Modalità intervento
 
-Mostra un riquadro tecnico in basso a destra con:
+#### Manuale
+È la modalità consigliata. Mostra un pulsante flottante:
 
-- stato dell'estensione
-- modalità attiva
-- editor rilevato o meno
+```text
+🔒 Anonimizza
+```
+
+Il testo viene modificato solo quando l'utente preme il pulsante. Dopo l'anonimizzazione, l'utente può controllare il testo e inviarlo manualmente.
+
+#### Automatica
+Replica il comportamento originario dell'estensione. Quando l'utente preme Invio o clicca il pulsante di invio di ChatGPT, l'estensione prova ad anonimizzare il testo prima dell'invio.
+
+### Anonimizza aziende
+
+Opzione per mascherare nomi di società, clienti e fornitori.
+
+Esempio:
+
+```text
+Azienda Demo S.r.l.
+```
+
+può diventare:
+
+```text
+[COMPANY_1]
+```
+
+### Debug overlay
+
+Mostra un riquadro tecnico nella pagina ChatGPT con:
+
+- estensione attiva o meno
+- modalità anonimizzazione
+- modalità intervento
+- editor rilevato
 - numero di pattern trovati
 - ultima azione eseguita
 
 ### Test locale
 
-La pagina `test.html` permette di testare il motore di anonimizzazione senza usare ChatGPT.
+La pagina `test.html` permette di provare il motore senza ChatGPT.
 
-Tutti i dati presenti nel test locale sono **fittizi e dimostrativi**.
+Il test locale usa solo dati fittizi e dimostrativi.
 
-## GIF installazione
+## Installazione locale
 
-![Installazione PrivacyGPT Shield V3.3](docs/installazione_privacygpt_v33.gif)
+1. Scarica o clona il repository.
+2. Apri Chrome.
+3. Vai su `chrome://extensions`.
+4. Attiva **Modalità sviluppatore**.
+5. Clicca **Carica estensione non pacchettizzata**.
+6. Seleziona la cartella del progetto.
+7. Apri ChatGPT e ricarica la pagina.
+8. Apri il popup dell'estensione e configura le opzioni.
 
-## Struttura del repository
+## Struttura del progetto
 
 ```text
-PrivacyGPT_Shield_V3_3/
+privacygpt-shield-extension/
   manifest.json
   content.js
   popup.html
@@ -82,127 +111,57 @@ PrivacyGPT_Shield_V3_3/
   PRIVACY_POLICY.md
   CHANGELOG.md
   RELEASE_NOTES_v3.3.0.md
-  CONTRIBUTING.md
-  SECURITY.md
   LICENSE
-  .gitignore
   assets/
     logo_master.png
     github_banner.png
     icon16.png
     icon32.png
     icon48.png
-    icon64.png
-    icon96.png
     icon128.png
-    icon256.png
-    icon512.png
   docs/
     Guida_Installazione.md
     Guida_GitHub.md
     Documentazione_Tecnica.md
     installazione_privacygpt_v33.gif
-    screenshots/
-      step1.png
-      step2.png
-      step3.png
-      step4.png
 ```
 
-## Installazione in Chrome
+## Limiti noti
 
-1. Scarica lo ZIP del progetto o clona il repository.
-2. Estrai lo ZIP in una cartella locale.
-3. Apri Chrome.
-4. Vai su `chrome://extensions`.
-5. Attiva **Modalità sviluppatore**.
-6. Clicca **Carica estensione non pacchettizzata**.
-7. Seleziona la cartella `PrivacyGPT_Shield_V3_3`.
-8. Apri ChatGPT e ricarica la pagina.
-9. Apri il popup dell'estensione e scegli modalità e opzioni.
+PrivacyGPT Shield Extension V3.3 usa un motore locale basato su regole e regex. È utile per ridurre il rischio di esposizione dati, ma non garantisce anonimizzazione perfetta in ogni contesto.
 
-## Uso
+Sono possibili:
 
-1. Scrivi o incolla un testo nell'editor di ChatGPT.
-2. Premi invio oppure clicca il pulsante di invio.
-3. L'estensione analizza il testo.
-4. Se trova pattern sensibili, sostituisce i valori con token anonimi.
+- falsi positivi
+- falsi negativi
+- risultati non perfetti su email thread molto lunghe
+- necessità di controllo umano prima dell'invio
 
-Esempi di token:
+Per questo la modalità **Manuale** è consigliata.
 
-- `[EMAIL_1]`
-- `[PHONE_1]`
-- `[IBAN_1]`
-- `[PERSON_1]`
-- `[ADDRESS_1]`
+## Roadmap
 
-## Popup dell'estensione
+### V3.3
+Versione stabile con motore regex locale, modalità manuale e automatica.
 
-Dal popup puoi gestire:
+### V4.0
+Possibile integrazione opzionale con un motore locale AI, separato dall'estensione, basato su PrivacyGPT Local Engine.
 
-- attivazione o disattivazione dell'estensione
-- modalità semplice o legale
-- debug overlay
-- mascheramento aziende
-- diagnostica su ChatGPT
-- apertura del test locale
+## Privacy
 
-## Documentazione
+L'estensione:
 
-- [Guida installazione](docs/Guida_Installazione.md)
-- [Guida GitHub](docs/Guida_GitHub.md)
-- [Documentazione tecnica](docs/Documentazione_Tecnica.md)
-- [Privacy Policy](PRIVACY_POLICY.md)
-- [Changelog](CHANGELOG.md)
-- [Release notes V3.3](RELEASE_NOTES_v3.3.0.md)
+- elabora il testo localmente nel browser
+- non invia il testo a server esterni
+- salva solo impostazioni locali tramite `chrome.storage.local`
+- non usa API esterne
 
-## Architettura
-
-### `manifest.json`
-Definisce nome, versione, permessi, icone, popup e content script.
-
-### `content.js`
-Gestisce l'integrazione con ChatGPT, l'intercettazione dell'invio, il debug overlay e la diagnostica.
-
-### `rules.js`
-Contiene il motore di anonimizzazione basato su pattern regex.
-
-### `popup.html` e `popup.js`
-Gestiscono l'interfaccia dell'estensione.
-
-### `test.html`
-Permette di testare localmente il motore con dati fittizi.
-
-## Limiti
-
-Il motore è basato su regex, quindi:
-
-- non garantisce anonimizzazione perfetta in ogni scenario
-- può generare falsi positivi
-- può non riconoscere dati scritti in formati insoliti
-- può richiedere aggiornamenti se cambia il DOM di ChatGPT
-
-## Pubblicazione GitHub consigliata
-
-```bash
-git init
-git add .
-git commit -m "Release PrivacyGPT Shield V3.3"
-git branch -M main
-git remote add origin https://github.com/TUO_USERNAME/privacygpt-shield-v3-3.git
-git push -u origin main
-```
-
-## Release GitHub consigliata
-
-- tag: `v3.3.0`
-- titolo: `PrivacyGPT Shield V3.3`
-- allegato: `PrivacyGPT_Shield_V3_3_GitHub_Package.zip`
+Per i dettagli vedi `PRIVACY_POLICY.md`.
 
 ## Autore
 
-PrivacyGPT Shield V3.3 è stato ideato e sviluppato da **Fabio Scialanga**.
+PrivacyGPT Shield Extension V3.3 è stato ideato e sviluppato da **Fabio Scialanga**.
 
 ## Licenza
 
-MIT License. Vedi file [LICENSE](LICENSE).
+Questo progetto include una licenza MIT di esempio. Personalizzala in base alle tue esigenze prima della pubblicazione definitiva.
