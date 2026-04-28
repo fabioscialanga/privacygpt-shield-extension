@@ -85,6 +85,27 @@ La pagina `test.html` permette di provare il motore senza ChatGPT.
 
 Il test locale usa solo dati fittizi e dimostrativi.
 
+
+## Demo visuali
+
+### Installazione
+
+La GIF seguente mostra i passaggi principali per installare l'estensione in Chrome in modalità sviluppatore.
+
+![Installazione PrivacyGPT Shield V3.3](docs/installazione_privacygpt_v33.gif)
+
+### Esempio di utilizzo
+
+La GIF seguente mostra il flusso consigliato in modalità manuale:
+
+1. scrivi o incolla il testo in ChatGPT
+2. scegli modalità Legale e Intervento Manuale
+3. premi **🔒 Anonimizza**
+4. controlla il testo anonimizzato
+5. invia manualmente il messaggio
+
+![Utilizzo PrivacyGPT Shield V3.3](docs/utilizzo_privacygpt_v33.gif)
+
 ## Installazione locale
 
 1. Scarica o clona il repository.
@@ -124,6 +145,8 @@ privacygpt-shield-extension/
     Guida_GitHub.md
     Documentazione_Tecnica.md
     installazione_privacygpt_v33.gif
+    utilizzo_privacygpt_v33.gif
+    Esempio_Utilizzo.md
 ```
 
 ## Limiti noti

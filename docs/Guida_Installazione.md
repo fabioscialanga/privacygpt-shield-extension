@@ -58,3 +58,8 @@ Verifica che la modalità intervento sia impostata su Automatica.
 
 ### Il test locale non funziona
 Apri la console del browser e verifica eventuali errori. In Manifest V3 gli script inline non sono permessi, quindi la logica del test è contenuta nel file `test.js`.
+
+
+## Animazione installazione
+
+![Installazione PrivacyGPT Shield V3.3](installazione_privacygpt_v33.gif)

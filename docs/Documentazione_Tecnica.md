@@ -73,3 +73,11 @@ L'estensione non invia testo a server esterni. Tutta l'elaborazione avviene loca
 ## Limiti
 
 Il motore è basato su regex e regole. Non può garantire anonimizzazione perfetta su tutti i testi. Per testi lunghi e molto complessi è consigliato controllare sempre il risultato in modalità Manuale.
+
+
+## Materiale dimostrativo
+
+La documentazione include due GIF:
+
+- `docs/installazione_privacygpt_v33.gif`, per mostrare l installazione in Chrome.
+- `docs/utilizzo_privacygpt_v33.gif`, per mostrare il flusso di utilizzo in modalità manuale.
