@@ -1,33 +1,37 @@
 # Changelog
 
-## 3.3.2
+## v3.3.0
 
-- Migliorata anonimizzazione email thread e firme aziendali.
-- Aggiunto riconoscimento display name in header email.
-- Aggiunto riconoscimento indirizzi con `snc` e righe CAP/città.
-- Aggiunto riconoscimento server `IP:porta`.
-- Aggiunto riconoscimento credenziali tecniche isolate.
-- Aggiunto riconoscimento nomi database in contesti tecnici.
-- Migliorati telefoni con separatori `/`, `.`, spazio e trattino.
-- Ridotti falsi positivi su contratti lunghi.
+### Aggiunto
 
-## 3.3.1
+- Modalità Semplice
+- Modalità Legale
+- Debug overlay realmente attivabile e disattivabile
+- Opzione Maschera aziende
+- Logo originale con scudo e lucchetto
+- Icone Chrome in più dimensioni
+- Banner per README GitHub
+- GIF animata installazione
+- Guida installazione
+- Guida GitHub
+- Documentazione tecnica
+- Privacy Policy
+- Release notes
 
-- Ridotti falsi positivi nella modalità legale.
-- Rimosso riconoscimento generico troppo aggressivo dei nomi persona.
+### Modificato
 
-## 3.3.0
+- Sostituito il vecchio booleano `legalMode` con la proprietà `mode`, mantenendo compatibilità interna.
+- Migliorato il popup dell'estensione con branding e logo.
+- Aggiornato il test locale con soli dati fittizi e dimostrativi.
 
-- Introduzione modalità semplice e modalità legale.
-- Debug overlay opzionale.
-- Logo e asset grafici.
-- Test locale con dati fittizi.
+### Corretto
 
-## 3.3.3 - Email Thread Detection Hotfix
+- Rimossi completamente i dati reali di cliente dai file di test e dalla diagnostica interna.
 
-- Migliorato il riconoscimento delle email thread lunghe.
-- Rafforzato il parsing generico degli header `Da`, `A`, `Cc`, `From`, `To`.
-- Migliorato il riconoscimento dei nomi nelle firme senza cablare nomi reali.
-- Aggiunta modalità interna `emailThreadMode` per applicare regole più robuste quando il testo assomiglia a una catena email.
-- Migliorato il mascheramento automatico delle aziende nelle email thread in modalità legale.
-- Nessun nome reale o azienda reale è stato inserito nel sorgente per costruire le regole.
+
+## V3.3 - Miglioramento riconoscimento persone
+
+- Aggiunto `names.js` con dizionario generico di nomi propri comuni.
+- Migliorato il riconoscimento delle persone in header email, saluti e firme.
+- Migliorata la gestione delle date Outlook prima del riconoscimento telefoni.
+- Nessun cognome, azienda, cliente, email, indirizzo o credenziale reale è stato cablato nel motore.

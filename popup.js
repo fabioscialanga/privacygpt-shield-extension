@@ -1,13 +1,14 @@
-const ids = ['enabled','mode','debug','maskCompanies'];
+const ids = ['enabled','mode','interventionMode','debug','maskCompanies'];
 
 function out(v){
   document.getElementById('out').textContent = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
 }
 
-chrome.storage.local.get(['enabled','mode','legalMode','debug','maskCompanies'], (v)=>{
+chrome.storage.local.get(['enabled','mode','legalMode','interventionMode','debug','maskCompanies'], (v)=>{
   document.getElementById('enabled').checked = v.enabled !== false;
   document.getElementById('mode').value = v.mode || (v.legalMode === false ? 'simple' : 'legal');
-  document.getElementById('debug').checked = v.debug !== false;
+  document.getElementById('interventionMode').value = v.interventionMode || 'manual';
+  document.getElementById('debug').checked = !!v.debug;
   document.getElementById('maskCompanies').checked = !!v.maskCompanies;
 });
 
@@ -15,6 +16,7 @@ document.getElementById('save').onclick = ()=>{
   const settings = {
     enabled: document.getElementById('enabled').checked,
     mode: document.getElementById('mode').value,
+    interventionMode: document.getElementById('interventionMode').value,
     debug: document.getElementById('debug').checked,
     maskCompanies: document.getElementById('maskCompanies').checked
   };

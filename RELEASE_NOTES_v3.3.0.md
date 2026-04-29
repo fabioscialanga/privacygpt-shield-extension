@@ -1,16 +1,21 @@
-# Release Notes PrivacyGPT Shield V3.3.0
+# Release Notes - PrivacyGPT Shield V3.3
 
-## Novità
+PrivacyGPT Shield V3.3 introduce una versione più professionale, documentata e pronta per la distribuzione GitHub.
 
-- Nuovo logo con scudo e lucchetto.
-- Modalità semplice e modalità legale.
-- Debug overlay opzionale.
-- Test locale con soli dati fittizi.
-- Test locale corretto con stato visibile ed error handling.
-- Documentazione completa per GitHub.
-- Privacy Policy inclusa.
-- GIF animata di installazione.
+## Novità principali
 
-## Nota privacy
+- Nuovo branding con logo scudo e lucchetto
+- Modalità Semplice
+- Modalità Legale
+- Debug overlay opzionale
+- Test locale sanificato con soli dati fittizi
+- Documentazione completa
+- Privacy Policy
+- GIF installazione
+- Pacchetto pronto per GitHub
 
-Il pacchetto non contiene dati reali di clienti. Gli esempi inclusi sono fittizi e dimostrativi.
+## Nota importante sulla privacy
+
+Questa release non contiene dati reali di clienti nei file demo, nel test locale o nella diagnostica interna.
+
+L'estensione elabora il testo localmente nel browser e non invia contenuti a server esterni.

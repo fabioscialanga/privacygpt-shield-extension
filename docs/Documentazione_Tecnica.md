@@ -55,45 +55,20 @@ Il motore in `rules.js` restituisce un oggetto con:
 
 La pagina `test.html` è stata sanificata e usa solo dati dimostrativi fittizi.
 
-## Nota CSP su Manifest V3
 
-Le pagine dell'estensione non possono eseguire script inline a causa della Content Security Policy di Chrome.
-Per questo motivo il test locale usa due file separati:
+## Dizionario generico nomi comuni
 
-- `test.html` per la struttura HTML
-- `test.js` per la logica JavaScript
+La versione V3.3 include il file `names.js`, caricato prima di `rules.js`.
 
-Questa scelta evita errori come `Executing inline script violates the Content Security Policy directive`.
+Il file espone `window.PrivacyGPTFirstNames`, un insieme locale di nomi propri comuni.
 
-## Hotfix 3.3.1 - riduzione falsi positivi
+Il dizionario non contiene cognomi, aziende, clienti, indirizzi, email o credenziali. Viene usato solo come segnale di supporto per uno scoring contestuale.
 
-La regola generica di riconoscimento di nomi propri a due o tre parole è stata rimossa perché nei contratti lunghi produceva falsi positivi, ad esempio su definizioni, titoli, servizi, prodotti, documenti o concetti giuridici.
+Esempi di contesti che aumentano il punteggio:
 
-Da questa versione il token `PERSON` viene applicato solo quando il possibile nome compare dopo un contesto forte, ad esempio:
+- header email `Da:`, `A:`, `Cc:`
+- presenza di `<[EMAIL_X]>` dopo il nome
+- saluti come `Ciao Nome` o `Buongiorno Nome`
+- firme email vicino a ruoli aziendali
 
-- legale rappresentante
-- rappresentante legale
-- nella persona di
-- in persona di
-- signor / signora / sig. / sig.ra
-- referente amministrativo
-- amministratore delegato
-
-Questo approccio è più prudente e adatto a documenti contrattuali lunghi.
-
-## Hotfix 3.3.2
-
-La versione 3.3.2 introduce regole più adatte alle email thread esportate da Outlook o copiate da client di posta.
-
-Pattern migliorati:
-
-- display name prima di email già anonimizzate
-- righe firma con nome e ruolo
-- aziende con suffisso societario
-- indirizzi su singola riga e righe CAP/città
-- server in formato IP:porta
-- username amministrativi isolati
-- password-like isolate
-- nomi database in frasi tecniche
-
-Nota: le regole restano regex-based, quindi vanno considerate come supporto preventivo e non come garanzia assoluta di anonimizzazione completa.
+La modalità Semplice non usa queste regole avanzate sulle persone.

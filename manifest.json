@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "PrivacyGPT Shield V3.3",
-  "version": "3.3.3",
-  "description": "Anonimizzazione privacy per ChatGPT con modalità semplice, modalità legale, debug overlay opzionale e supporto migliorato per email thread.",
+  "version": "3.3.0",
+  "description": "Anonimizzazione privacy locale per ChatGPT con modalità semplice, legale, manuale/automatica e dizionario generico nomi comuni.",
   "permissions": [
     "storage",
     "activeTab",
@@ -35,6 +35,7 @@
         "https://chat.openai.com/*"
       ],
       "js": [
+        "names.js",
         "rules.js",
         "content.js"
       ],
@@ -49,7 +50,9 @@
         "assets/icon32.png",
         "assets/icon48.png",
         "assets/icon128.png",
-        "test.js"
+        "test.js",
+        "names.js",
+        "rules.js"
       ],
       "matches": [
         "<all_urls>"

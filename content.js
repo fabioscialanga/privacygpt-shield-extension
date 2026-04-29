@@ -2,7 +2,8 @@
   const STATE = {
     enabled: true,
     mode: 'legal',
-    debug: true,
+    interventionMode: 'manual',
+    debug: false,
     maskCompanies: false,
     last: { detected:false, matches:0, action:'loaded' }
   };
@@ -13,6 +14,10 @@
 
   function getModeLabel(){
     return STATE.mode === 'legal' ? 'Legal' : 'Simple';
+  }
+
+  function getInterventionLabel(){
+    return STATE.interventionMode === 'auto' ? 'Automatic' : 'Manual';
   }
 
   function removeOverlay(){
@@ -26,7 +31,7 @@
 
     const box = document.createElement('div');
     box.id = 'privacygpt-debug-overlay';
-    box.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483647;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px;line-height:1.35';
+    box.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483647;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:340px;line-height:1.35';
     box.innerHTML = '<b>PrivacyGPT Debug</b><div id="privacygpt-debug-body">loading...</div>';
     document.documentElement.appendChild(box);
   }
@@ -41,16 +46,43 @@
     const body = document.getElementById('privacygpt-debug-body');
     if(!body) return;
 
-    body.innerHTML = `Active: <b>${STATE.enabled ? 'YES' : 'NO'}</b><br>Mode: <b>${getModeLabel()}</b><br>Input detected: <b>${STATE.last.detected ? 'YES' : 'NO'}</b><br>Patterns matched: <b>${STATE.last.matches}</b><br>Last action: <b>${action || STATE.last.action}</b>`;
+    body.innerHTML = `Active: <b>${STATE.enabled ? 'YES' : 'NO'}</b><br>Mode: <b>${getModeLabel()}</b><br>Intervention: <b>${getInterventionLabel()}</b><br>Companies: <b>${STATE.maskCompanies ? 'YES' : 'NO'}</b><br>Input detected: <b>${STATE.last.detected ? 'YES' : 'NO'}</b><br>Patterns matched: <b>${STATE.last.matches}</b><br>Last action: <b>${action || STATE.last.action}</b>`;
+  }
+
+  function createManualButton(){
+    let button = document.getElementById('privacygpt-manual-button');
+    if(button) return button;
+
+    button = document.createElement('button');
+    button.id = 'privacygpt-manual-button';
+    button.type = 'button';
+    button.textContent = '🔒 Anonimizza';
+    button.style.cssText = 'position:fixed;right:18px;bottom:86px;z-index:2147483647;background:#0f172a;color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:10px 14px;font:13px Arial,sans-serif;box-shadow:0 8px 24px rgba(15,23,42,.35);cursor:pointer;display:none';
+    button.addEventListener('click', ()=>{
+      const editors = getEditors();
+      const active = editors.includes(document.activeElement) ? document.activeElement : editors[editors.length-1];
+      if(active) processEditor(active, 'Manual button');
+    });
+    document.documentElement.appendChild(button);
+    return button;
+  }
+
+  function updateManualButton(){
+    const button = createManualButton();
+    const editors = getEditors();
+    const show = STATE.enabled && STATE.interventionMode === 'manual' && editors.length > 0;
+    button.style.display = show ? 'block' : 'none';
   }
 
   function loadSettings(){
     if (!chrome?.storage?.local) return;
-    chrome.storage.local.get(['enabled','mode','legalMode','debug','maskCompanies'], (v)=>{
+    chrome.storage.local.get(['enabled','mode','legalMode','interventionMode','debug','maskCompanies'], (v)=>{
       STATE.enabled = v.enabled !== false;
       STATE.mode = v.mode || (v.legalMode === false ? 'simple' : 'legal');
-      STATE.debug = v.debug !== false;
+      STATE.interventionMode = v.interventionMode || 'manual';
+      STATE.debug = !!v.debug;
       STATE.maskCompanies = !!v.maskCompanies;
+      updateManualButton();
       updateOverlay('settings loaded');
       log('settings', JSON.stringify(STATE));
     });
@@ -126,6 +158,7 @@
 
   function attachListeners(){
     document.addEventListener('keydown', (e)=>{
+      if(STATE.interventionMode !== 'auto') return;
       if(e.key === 'Enter' && !e.shiftKey){
         const editors = getEditors();
         const active = editors.includes(document.activeElement) ? document.activeElement : editors[editors.length-1];
@@ -134,6 +167,7 @@
     }, true);
 
     document.addEventListener('click', (e)=>{
+      if(STATE.interventionMode !== 'auto') return;
       const target = e.target;
       const isSend = target && (
         target.closest('button[data-testid*="send"]') ||
@@ -149,6 +183,7 @@
     setInterval(()=>{
       const editors = getEditors();
       STATE.last.detected = editors.length > 0;
+      updateManualButton();
       updateOverlay(editors.length ? 'editor found' : 'waiting editor');
     }, 2500);
   }
@@ -170,8 +205,10 @@
         editorsFound: editors.length,
         enabled: STATE.enabled,
         mode: STATE.mode,
+        interventionMode: STATE.interventionMode,
         debug: STATE.debug,
         maskCompanies: STATE.maskCompanies,
+        firstNamesDictionary: !!window.PrivacyGPTFirstNames,
         sampleMatches: res?.matches?.length || 0,
         sampleOutput: res?.text || null
       });
@@ -185,6 +222,7 @@
     }
   });
 
+  createManualButton();
   loadSettings();
   attachListeners();
   log('content script loaded', location.href);

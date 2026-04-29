@@ -2,13 +2,6 @@
 
 ![PrivacyGPT Shield Banner](assets/github_banner.png)
 
-
-## Stato versione
-
-Versione pacchetto: **3.3.1**, hotfix della V3.3.
-
-Questa build corregge i falsi positivi rilevati su contratti lunghi, in particolare i casi in cui termini contrattuali come servizi, definizioni, clienti, software o concetti giuridici venivano erroneamente trasformati in token `[PERSON_N]`.
-
 **PrivacyGPT Shield V3.3** è una estensione Chrome ideata e sviluppata da **Fabio Scialanga** per aiutare professionisti, consulenti e aziende ad anonimizzare dati sensibili prima dell'invio di prompt a ChatGPT.
 
 > PrivacyGPT Shield elabora il testo localmente nel browser e non invia i contenuti a server esterni.
@@ -16,10 +9,6 @@ Questa build corregge i falsi positivi rilevati su contratti lunghi, in particol
 ## Obiettivo del progetto
 
 Quando si lavora con documenti tecnici, amministrativi, contrattuali o legali, può capitare di incollare in ChatGPT contenuti che contengono dati personali o aziendali. PrivacyGPT Shield nasce per ridurre questo rischio, sostituendo automaticamente i pattern sensibili riconosciuti con token anonimi.
-
-## Versione 3.3.3
-
-Questa build include una hotfix per migliorare il comportamento su email thread lunghe, firme aziendali e header Outlook, senza cablare nomi reali nel sorgente.
 
 ## Funzionalità principali
 
@@ -46,6 +35,14 @@ Pensata per contesti contrattuali, legali e amministrativi. Oltre ai dati della 
 - sedi legali
 - città in contesto sensibile
 - aziende, se l'opzione è attiva
+
+### Dizionario nomi comuni
+
+La modalità **Legale** usa anche un piccolo dizionario locale di nomi propri comuni per migliorare il riconoscimento delle persone in header email, saluti e firme.
+
+Il dizionario contiene solo nomi di battesimo generici, non contiene cognomi, aziende, email, indirizzi, clienti o dati reali specifici.
+
+Il riconoscimento non si basa solo sul nome: il motore valuta anche il contesto, ad esempio `Da:`, `A:`, `Cc:`, saluti, firme e righe vicine a ruoli aziendali.
 
 ### Debug overlay opzionale
 
@@ -77,7 +74,6 @@ PrivacyGPT_Shield_V3_3/
   popup.js
   rules.js
   test.html
-  test.js
   README.md
   PRIVACY_POLICY.md
   CHANGELOG.md
