@@ -54,21 +54,3 @@ Il motore in `rules.js` restituisce un oggetto con:
 ## Test locale
 
 La pagina `test.html` è stata sanificata e usa solo dati dimostrativi fittizi.
-
-
-## Dizionario generico nomi comuni
-
-La versione V3.3 include il file `names.js`, caricato prima di `rules.js`.
-
-Il file espone `window.PrivacyGPTFirstNames`, un insieme locale di nomi propri comuni.
-
-Il dizionario non contiene cognomi, aziende, clienti, indirizzi, email o credenziali. Viene usato solo come segnale di supporto per uno scoring contestuale.
-
-Esempi di contesti che aumentano il punteggio:
-
-- header email `Da:`, `A:`, `Cc:`
-- presenza di `<[EMAIL_X]>` dopo il nome
-- saluti come `Ciao Nome` o `Buongiorno Nome`
-- firme email vicino a ruoli aziendali
-
-La modalità Semplice non usa queste regole avanzate sulle persone.

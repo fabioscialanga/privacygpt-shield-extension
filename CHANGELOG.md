@@ -35,3 +35,10 @@
 - Migliorato il riconoscimento delle persone in header email, saluti e firme.
 - Migliorata la gestione delle date Outlook prima del riconoscimento telefoni.
 - Nessun cognome, azienda, cliente, email, indirizzo o credenziale reale è stato cablato nel motore.
+
+## V3.3 - Person detection refinement
+
+- Migliorato il riconoscimento generico di persone negli header email con formato `Cognome, Nome`.
+- Migliorato il riconoscimento generico di menzioni con `@Nome Cognome` e `@Cognome, Nome @Sede`.
+- Migliorata la gestione delle righe firma e delle aziende/acronimi su righe dedicate.
+- Nessun nome cliente, azienda cliente, indirizzo, email o credenziale reale è stato cablato nel sorgente.
