@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8">
   <style>
-    body{font-family:Arial,sans-serif;width:380px;padding:14px;background:#f8fafc;color:#111827}
+    body{font-family:Arial,sans-serif;width:360px;padding:14px;background:#f8fafc;color:#111827}
     .brand{display:flex;gap:12px;align-items:center;margin-bottom:12px;background:#0f172a;color:#fff;padding:12px;border-radius:12px}
     .brand img{width:44px;height:44px;border-radius:10px}
     .brand h1{font-size:18px;margin:0}
     .sub{font-size:12px;color:#cbd5e1;margin-top:4px}
     .row{display:flex;justify-content:space-between;align-items:center;margin:10px 0;padding:10px;background:white;border-radius:8px;gap:10px;border:1px solid #e5e7eb}
-    .row .txt{display:flex;flex-direction:column;gap:3px}
-    .hint{font-size:11px;color:#64748b;line-height:1.25}
     .row select,.row input[type="checkbox"]{flex:0 0 auto}
     .btn{width:100%;padding:10px;border:0;border-radius:8px;background:#111827;color:white;cursor:pointer;margin-top:8px}
     .btn.secondary{background:#2563eb}
@@ -29,42 +27,15 @@
   <div class="row"><span>Attivo</span><input id="enabled" type="checkbox"></div>
 
   <div class="row">
-    <div class="txt">
-      <span>Modalità anonimizzazione</span>
-      <span class="hint">Semplice per dati certi, Legale per documenti e email.</span>
-    </div>
+    <span>Modalità</span>
     <select id="mode">
       <option value="simple">Semplice</option>
       <option value="legal">Legale</option>
     </select>
   </div>
 
-  <div class="row">
-    <div class="txt">
-      <span>Modalità intervento</span>
-      <span class="hint">Manuale mostra il pulsante Anonimizza. Automatica interviene all'invio.</span>
-    </div>
-    <select id="interventionMode">
-      <option value="manual">Manuale</option>
-      <option value="auto">Automatica</option>
-    </select>
-  </div>
-
-  <div class="row">
-    <div class="txt">
-      <span>Debug overlay</span>
-      <span class="hint">Mostra informazioni tecniche sulla pagina.</span>
-    </div>
-    <input id="debug" type="checkbox">
-  </div>
-
-  <div class="row">
-    <div class="txt">
-      <span>Anonimizza aziende</span>
-      <span class="hint">Maschera nomi di società, clienti e fornitori.</span>
-    </div>
-    <input id="maskCompanies" type="checkbox">
-  </div>
+  <div class="row"><span>Debug overlay</span><input id="debug" type="checkbox"></div>
+  <div class="row"><span>Maschera aziende</span><input id="maskCompanies" type="checkbox"></div>
 
   <button id="save" class="btn">Salva impostazioni</button>
   <button id="diag" class="btn secondary">Run diagnostics su ChatGPT</button>

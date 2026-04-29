@@ -1,16 +1,16 @@
-# Release Notes PrivacyGPT Shield Extension V3.3
+# Release Notes PrivacyGPT Shield V3.3.0
 
-PrivacyGPT Shield Extension V3.3 introduce una gestione più controllabile dell'anonimizzazione.
+## Novità
 
-## Novità principali
+- Nuovo logo con scudo e lucchetto.
+- Modalità semplice e modalità legale.
+- Debug overlay opzionale.
+- Test locale con soli dati fittizi.
+- Test locale corretto con stato visibile ed error handling.
+- Documentazione completa per GitHub.
+- Privacy Policy inclusa.
+- GIF animata di installazione.
 
-- Modalità intervento Manuale.
-- Pulsante `🔒 Anonimizza` visibile su ChatGPT quando la modalità Manuale è attiva.
-- Modalità Automatica per mantenere il comportamento precedente.
-- Opzione `Anonimizza aziende` al posto di `Maschera aziende`.
-- Documentazione aggiornata.
-- Pacchetto pronto per GitHub.
+## Nota privacy
 
-## Uso consigliato
-
-Per documenti, email lunghe e testi sensibili è consigliata la modalità Manuale, così l'utente può controllare il testo prima dell'invio.
+Il pacchetto non contiene dati reali di clienti. Gli esempi inclusi sono fittizi e dimostrativi.

@@ -1,29 +1,33 @@
 # Changelog
 
-## V3.3
+## 3.3.2
 
-### Aggiunto
+- Migliorata anonimizzazione email thread e firme aziendali.
+- Aggiunto riconoscimento display name in header email.
+- Aggiunto riconoscimento indirizzi con `snc` e righe CAP/città.
+- Aggiunto riconoscimento server `IP:porta`.
+- Aggiunto riconoscimento credenziali tecniche isolate.
+- Aggiunto riconoscimento nomi database in contesti tecnici.
+- Migliorati telefoni con separatori `/`, `.`, spazio e trattino.
+- Ridotti falsi positivi su contratti lunghi.
 
-- Modalità intervento Manuale.
-- Pulsante flottante `🔒 Anonimizza` su ChatGPT.
-- Modalità intervento Automatica per mantenere il comportamento originario.
-- Opzione rinominata in `Anonimizza aziende`.
-- Documentazione aggiornata per GitHub.
+## 3.3.1
 
-### Migliorato
+- Ridotti falsi positivi nella modalità legale.
+- Rimosso riconoscimento generico troppo aggressivo dei nomi persona.
 
-- Popup più chiaro.
-- Debug overlay con indicazione della modalità intervento.
-- Test locale compatibile con Manifest V3 tramite `test.js` esterno.
+## 3.3.0
 
-### Sicurezza
+- Introduzione modalità semplice e modalità legale.
+- Debug overlay opzionale.
+- Logo e asset grafici.
+- Test locale con dati fittizi.
 
-- Nessun dato reale nel test locale.
-- Elaborazione sempre locale nel browser.
-## V3.3 Documentation refresh
+## 3.3.3 - Email Thread Detection Hotfix
 
-- Ripristinata la GIF animata di installazione.
-- Aggiunta una nuova GIF di esempio utilizzo in modalità manuale.
-- Aggiunta la guida `docs/Esempio_Utilizzo.md`.
-- Aggiornato il README con le demo visuali.
-
+- Migliorato il riconoscimento delle email thread lunghe.
+- Rafforzato il parsing generico degli header `Da`, `A`, `Cc`, `From`, `To`.
+- Migliorato il riconoscimento dei nomi nelle firme senza cablare nomi reali.
+- Aggiunta modalità interna `emailThreadMode` per applicare regole più robuste quando il testo assomiglia a una catena email.
+- Migliorato il mascheramento automatico delle aziende nelle email thread in modalità legale.
+- Nessun nome reale o azienda reale è stato inserito nel sorgente per costruire le regole.

@@ -1,65 +1,75 @@
-# Guida installazione PrivacyGPT Shield Extension V3.3
+# Guida installazione PrivacyGPT Shield V3.3
 
 ## Obiettivo
+Installare l'estensione manualmente in Chrome e verificarne il corretto funzionamento.
 
-Installare l'estensione Chrome in locale e verificarne il funzionamento.
+## Prerequisiti
 
-## Installazione
+- Google Chrome oppure un browser Chromium compatibile
+- il progetto scaricato in ZIP o clonato da GitHub
+- cartella del progetto estratta localmente
 
-1. Scarica il pacchetto ZIP oppure clona il repository GitHub.
-2. Se hai scaricato lo ZIP, estrailo in una cartella locale.
-3. Apri Google Chrome.
-4. Vai su `chrome://extensions`.
-5. Attiva **Modalità sviluppatore**.
-6. Clicca **Carica estensione non pacchettizzata**.
-7. Seleziona la cartella `privacygpt-shield-extension` o `PrivacyGPT_Shield_V3_3`.
-8. Verifica che l'estensione compaia nella lista.
-9. Apri ChatGPT e ricarica la pagina.
-10. Apri il popup dell'estensione e scegli le impostazioni.
+## Procedura dettagliata
 
-## Impostazioni disponibili
+### 1. Scarica il progetto
+Puoi scegliere una delle due strade:
 
-### Attivo
-Abilita o disabilita l'estensione.
+- scaricare lo ZIP del repository
+- clonare il repository con Git
 
-### Modalità anonimizzazione
+### 2. Estrai lo ZIP
+Se hai scaricato il pacchetto ZIP, estrailo in una cartella locale.
 
-- **Semplice**: maschera dati strutturati come email, telefoni, URL, IP, IBAN, codici fiscali e partite IVA.
-- **Legale**: aggiunge controlli più ampi per documenti, contratti, firme email e testi sensibili.
+### 3. Apri la pagina estensioni di Chrome
+Apri Chrome e vai su:
 
-### Modalità intervento
+`chrome://extensions`
 
-- **Manuale**: mostra il pulsante `🔒 Anonimizza`. Il testo viene modificato solo quando premi il pulsante.
-- **Automatica**: anonimizza quando premi Invio o clicchi il pulsante di invio di ChatGPT.
+### 4. Attiva la Modalità sviluppatore
+L'interruttore si trova in alto a destra.
 
-La modalità Manuale è consigliata perché permette di controllare il risultato prima dell'invio.
+### 5. Carica l'estensione
+Clicca su:
 
-### Debug overlay
-Mostra informazioni tecniche nella pagina ChatGPT.
+`Carica estensione non pacchettizzata`
 
-### Anonimizza aziende
-Maschera nomi di società, clienti e fornitori.
+### 6. Seleziona la cartella del progetto
+Scegli la cartella:
 
-## Test locale
+`PrivacyGPT_Shield_V3_3`
 
-Dal popup puoi cliccare **Apri test locale**. La pagina di test usa dati fittizi e serve a verificare il motore di anonimizzazione senza usare ChatGPT.
+### 7. Verifica l'installazione
+Dovresti vedere l'estensione nell'elenco di Chrome con il nome **PrivacyGPT Shield V3.3** e il logo con scudo e lucchetto.
 
-## Problemi comuni
+### 8. Apri ChatGPT
+Apri ChatGPT e ricarica la pagina dopo l'installazione.
 
-### Il pulsante Anonimizza non compare
-Verifica che:
+### 9. Configura il popup
+Dal popup puoi:
 
-- l'estensione sia attiva
-- la modalità intervento sia impostata su Manuale
-- la pagina ChatGPT sia stata ricaricata
+- attivare o disattivare l'estensione
+- scegliere modalità semplice o legale
+- attivare o disattivare il debug overlay
+- decidere se mascherare anche le aziende
 
-### L'anonimizzazione non parte in automatico
-Verifica che la modalità intervento sia impostata su Automatica.
+### 10. Esegui i test
+Puoi usare due strumenti:
 
-### Il test locale non funziona
-Apri la console del browser e verifica eventuali errori. In Manifest V3 gli script inline non sono permessi, quindi la logica del test è contenuta nel file `test.js`.
+- `Run diagnostics su ChatGPT`
+- `Apri test locale`
 
+## Verifiche utili
 
-## Animazione installazione
+### Se il test locale funziona ma ChatGPT no
+Probabile problema di selezione dell'editor o di cambiamenti nel DOM di ChatGPT.
 
-![Installazione PrivacyGPT Shield V3.3](installazione_privacygpt_v33.gif)
+### Se il test locale non funziona
+Probabile problema nel motore regex di `rules.js`.
+
+### Se non vedi il debug overlay
+Controlla che l'opzione sia attiva e ricarica la pagina.
+
+## GIF animata
+La guida include anche una GIF animata che mostra visivamente i passaggi principali di installazione:
+
+`docs/installazione_privacygpt_v33.gif`

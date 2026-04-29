@@ -2,13 +2,10 @@
   const STATE = {
     enabled: true,
     mode: 'legal',
-    interventionMode: 'manual',
     debug: true,
     maskCompanies: false,
     last: { detected:false, matches:0, action:'loaded' }
   };
-
-  const MANUAL_BUTTON_ID = 'privacygpt-manual-anonymize-button';
 
   function log(...args){
     if(STATE.debug) console.log('[PrivacyGPT Shield V3.3]', ...args);
@@ -16,10 +13,6 @@
 
   function getModeLabel(){
     return STATE.mode === 'legal' ? 'Legal' : 'Simple';
-  }
-
-  function getInterventionLabel(){
-    return STATE.interventionMode === 'auto' ? 'Auto' : 'Manual';
   }
 
   function removeOverlay(){
@@ -33,7 +26,7 @@
 
     const box = document.createElement('div');
     box.id = 'privacygpt-debug-overlay';
-    box.style.cssText = 'position:fixed;right:14px;bottom:74px;z-index:2147483647;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px;line-height:1.35';
+    box.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483647;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:320px;line-height:1.35';
     box.innerHTML = '<b>PrivacyGPT Debug</b><div id="privacygpt-debug-body">loading...</div>';
     document.documentElement.appendChild(box);
   }
@@ -48,51 +41,16 @@
     const body = document.getElementById('privacygpt-debug-body');
     if(!body) return;
 
-    body.innerHTML = `Active: <b>${STATE.enabled ? 'YES' : 'NO'}</b><br>Mode: <b>${getModeLabel()}</b><br>Intervention: <b>${getInterventionLabel()}</b><br>Input detected: <b>${STATE.last.detected ? 'YES' : 'NO'}</b><br>Patterns matched: <b>${STATE.last.matches}</b><br>Last action: <b>${action || STATE.last.action}</b>`;
-  }
-
-  function removeManualButton(){
-    const button = document.getElementById(MANUAL_BUTTON_ID);
-    if(button) button.remove();
-  }
-
-  function ensureManualButton(){
-    if(!STATE.enabled || STATE.interventionMode !== 'manual'){
-      removeManualButton();
-      return;
-    }
-
-    let button = document.getElementById(MANUAL_BUTTON_ID);
-    if(button) return;
-
-    button = document.createElement('button');
-    button.id = MANUAL_BUTTON_ID;
-    button.type = 'button';
-    button.textContent = '🔒 Anonimizza';
-    button.title = 'Anonimizza il testo prima di inviarlo';
-    button.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483647;background:#111827;color:#fff;border:0;border-radius:999px;padding:11px 15px;font:13px Arial,sans-serif;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25)';
-    button.addEventListener('click', ()=>{
-      const editors = getEditors();
-      const active = editors.includes(document.activeElement) ? document.activeElement : editors[editors.length-1];
-      if(active){
-        processEditor(active, 'Manual button');
-      } else {
-        STATE.last.action = 'manual button: no editor found';
-        updateOverlay(STATE.last.action);
-      }
-    });
-    document.documentElement.appendChild(button);
+    body.innerHTML = `Active: <b>${STATE.enabled ? 'YES' : 'NO'}</b><br>Mode: <b>${getModeLabel()}</b><br>Input detected: <b>${STATE.last.detected ? 'YES' : 'NO'}</b><br>Patterns matched: <b>${STATE.last.matches}</b><br>Last action: <b>${action || STATE.last.action}</b>`;
   }
 
   function loadSettings(){
     if (!chrome?.storage?.local) return;
-    chrome.storage.local.get(['enabled','mode','legalMode','interventionMode','debug','maskCompanies'], (v)=>{
+    chrome.storage.local.get(['enabled','mode','legalMode','debug','maskCompanies'], (v)=>{
       STATE.enabled = v.enabled !== false;
       STATE.mode = v.mode || (v.legalMode === false ? 'simple' : 'legal');
-      STATE.interventionMode = v.interventionMode || 'manual';
       STATE.debug = v.debug !== false;
       STATE.maskCompanies = !!v.maskCompanies;
-      ensureManualButton();
       updateOverlay('settings loaded');
       log('settings', JSON.stringify(STATE));
     });
@@ -168,7 +126,6 @@
 
   function attachListeners(){
     document.addEventListener('keydown', (e)=>{
-      if(STATE.interventionMode !== 'auto') return;
       if(e.key === 'Enter' && !e.shiftKey){
         const editors = getEditors();
         const active = editors.includes(document.activeElement) ? document.activeElement : editors[editors.length-1];
@@ -177,7 +134,6 @@
     }, true);
 
     document.addEventListener('click', (e)=>{
-      if(STATE.interventionMode !== 'auto') return;
       const target = e.target;
       const isSend = target && (
         target.closest('button[data-testid*="send"]') ||
@@ -193,7 +149,6 @@
     setInterval(()=>{
       const editors = getEditors();
       STATE.last.detected = editors.length > 0;
-      ensureManualButton();
       updateOverlay(editors.length ? 'editor found' : 'waiting editor');
     }, 2500);
   }
@@ -215,7 +170,6 @@
         editorsFound: editors.length,
         enabled: STATE.enabled,
         mode: STATE.mode,
-        interventionMode: STATE.interventionMode,
         debug: STATE.debug,
         maskCompanies: STATE.maskCompanies,
         sampleMatches: res?.matches?.length || 0,

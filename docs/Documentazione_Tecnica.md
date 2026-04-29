@@ -1,83 +1,99 @@
-# Documentazione tecnica PrivacyGPT Shield Extension V3.3
+# Documentazione tecnica PrivacyGPT Shield V3.3
 
-## Architettura
+## Panoramica tecnica
 
-L'estensione è composta da:
+L'estensione intercetta l'interazione con l'editor di ChatGPT e applica una trasformazione preventiva del testo tramite un motore regex-based.
 
-- `manifest.json`: configurazione Manifest V3
-- `content.js`: logica iniettata su ChatGPT
-- `rules.js`: motore di anonimizzazione locale
-- `popup.html` e `popup.js`: interfaccia utente del popup
-- `test.html` e `test.js`: test locale del motore
+## Flusso operativo
 
-## Impostazioni salvate
+1. caricamento impostazioni da `chrome.storage.local`
+2. individuazione editor di input nella pagina
+3. intercettazione invio tramite Enter o click sul pulsante di invio
+4. lettura del contenuto dell'editor
+5. anonimizzazione mediante `rules.js`
+6. sostituzione del testo anonimizzato nell'editor
+7. eventuale aggiornamento debug overlay
 
-Le impostazioni sono salvate in `chrome.storage.local`:
+## Storage usato
+
+Chiavi principali:
 
 - `enabled`
 - `mode`
-- `interventionMode`
 - `debug`
 - `maskCompanies`
 
-## Modalità anonimizzazione
+## Selettori usati per l'editor
 
-### `mode = simple`
-Applica pattern ad alta confidenza.
+- `div[contenteditable="true"]`
+- `textarea`
+- `[data-testid="prompt-textarea"]`
+- `#prompt-textarea`
 
-### `mode = legal`
-Applica pattern più estesi per contesti legali, firme email e testi strutturati.
+## Eventi monitorati
 
-## Modalità intervento
+- `keydown` su `Enter`
+- `click` sul pulsante di invio
+- polling periodico per verificare la presenza dell'editor
 
-### `interventionMode = manual`
-`content.js` crea un pulsante flottante `🔒 Anonimizza`. Il testo viene processato solo al click del pulsante.
+## Motore regole
 
-### `interventionMode = auto`
-`content.js` intercetta Enter o click sul pulsante di invio di ChatGPT e processa il testo prima dell'invio.
+Il motore in `rules.js` restituisce un oggetto con:
 
-## Debug overlay
+- `text`
+- `matches`
+- `counters`
+- `meta`
 
-Il debug overlay è creato dinamicamente da `content.js` e mostra:
+## Limiti tecnici
 
-- stato attivo
-- modalità anonimizzazione
-- modalità intervento
-- editor rilevato
-- numero match
-- ultima azione
+- dipendenza da regex
+- dipendenza dal DOM di ChatGPT
+- possibili falsi positivi o falsi negativi
 
-## Motore regex
+## Test locale
 
-Il file `rules.js` espone:
+La pagina `test.html` è stata sanificata e usa solo dati dimostrativi fittizi.
 
-```js
-window.PrivacyGPTRules.anonymizeText(text, options)
-```
+## Nota CSP su Manifest V3
 
-Output:
+Le pagine dell'estensione non possono eseguire script inline a causa della Content Security Policy di Chrome.
+Per questo motivo il test locale usa due file separati:
 
-```json
-{
-  "text": "testo anonimizzato",
-  "matches": [],
-  "counters": {},
-  "meta": {}
-}
-```
+- `test.html` per la struttura HTML
+- `test.js` per la logica JavaScript
 
-## Sicurezza
+Questa scelta evita errori come `Executing inline script violates the Content Security Policy directive`.
 
-L'estensione non invia testo a server esterni. Tutta l'elaborazione avviene localmente nel browser.
+## Hotfix 3.3.1 - riduzione falsi positivi
 
-## Limiti
+La regola generica di riconoscimento di nomi propri a due o tre parole è stata rimossa perché nei contratti lunghi produceva falsi positivi, ad esempio su definizioni, titoli, servizi, prodotti, documenti o concetti giuridici.
 
-Il motore è basato su regex e regole. Non può garantire anonimizzazione perfetta su tutti i testi. Per testi lunghi e molto complessi è consigliato controllare sempre il risultato in modalità Manuale.
+Da questa versione il token `PERSON` viene applicato solo quando il possibile nome compare dopo un contesto forte, ad esempio:
 
+- legale rappresentante
+- rappresentante legale
+- nella persona di
+- in persona di
+- signor / signora / sig. / sig.ra
+- referente amministrativo
+- amministratore delegato
 
-## Materiale dimostrativo
+Questo approccio è più prudente e adatto a documenti contrattuali lunghi.
 
-La documentazione include due GIF:
+## Hotfix 3.3.2
 
-- `docs/installazione_privacygpt_v33.gif`, per mostrare l installazione in Chrome.
-- `docs/utilizzo_privacygpt_v33.gif`, per mostrare il flusso di utilizzo in modalità manuale.
+La versione 3.3.2 introduce regole più adatte alle email thread esportate da Outlook o copiate da client di posta.
+
+Pattern migliorati:
+
+- display name prima di email già anonimizzate
+- righe firma con nome e ruolo
+- aziende con suffisso societario
+- indirizzi su singola riga e righe CAP/città
+- server in formato IP:porta
+- username amministrativi isolati
+- password-like isolate
+- nomi database in frasi tecniche
+
+Nota: le regole restano regex-based, quindi vanno considerate come supporto preventivo e non come garanzia assoluta di anonimizzazione completa.

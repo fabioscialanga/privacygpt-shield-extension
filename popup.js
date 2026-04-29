@@ -1,13 +1,12 @@
-const ids = ['enabled','mode','interventionMode','debug','maskCompanies'];
+const ids = ['enabled','mode','debug','maskCompanies'];
 
 function out(v){
   document.getElementById('out').textContent = typeof v === 'string' ? v : JSON.stringify(v, null, 2);
 }
 
-chrome.storage.local.get(['enabled','mode','legalMode','interventionMode','debug','maskCompanies'], (v)=>{
+chrome.storage.local.get(['enabled','mode','legalMode','debug','maskCompanies'], (v)=>{
   document.getElementById('enabled').checked = v.enabled !== false;
   document.getElementById('mode').value = v.mode || (v.legalMode === false ? 'simple' : 'legal');
-  document.getElementById('interventionMode').value = v.interventionMode || 'manual';
   document.getElementById('debug').checked = v.debug !== false;
   document.getElementById('maskCompanies').checked = !!v.maskCompanies;
 });
@@ -16,14 +15,12 @@ document.getElementById('save').onclick = ()=>{
   const settings = {
     enabled: document.getElementById('enabled').checked,
     mode: document.getElementById('mode').value,
-    interventionMode: document.getElementById('interventionMode').value,
     debug: document.getElementById('debug').checked,
     maskCompanies: document.getElementById('maskCompanies').checked
   };
 
   chrome.storage.local.set(settings, ()=>{
-    const intervention = settings.interventionMode === 'auto' ? 'Automatica' : 'Manuale';
-    out(`Impostazioni salvate. Modalità intervento: ${intervention}. Ricarica la pagina ChatGPT oppure premi Run diagnostics.`);
+    out('Impostazioni salvate. Ricarica la pagina ChatGPT oppure premi Run diagnostics.');
     chrome.tabs.query({active:true,currentWindow:true}, tabs=>{
       if(tabs[0]?.id){
         chrome.tabs.sendMessage(tabs[0].id, {type:'RELOAD_SETTINGS'}, ()=>{});
