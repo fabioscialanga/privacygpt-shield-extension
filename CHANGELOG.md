@@ -42,3 +42,9 @@
 - Migliorato il riconoscimento generico di menzioni con `@Nome Cognome` e `@Cognome, Nome @Sede`.
 - Migliorata la gestione delle righe firma e delle aziende/acronimi su righe dedicate.
 - Nessun nome cliente, azienda cliente, indirizzo, email o credenziale reale è stato cablato nel sorgente.
+
+## V3.3 Manual Debug Button Fix
+
+- Corretto il comportamento del pulsante flottante **🔒 Anonimizza** in modalità Manuale quando il Debug overlay è attivo.
+- Il pulsante viene ora mantenuto sopra l'overlay e riposizionato per evitare sovrapposizioni.
+

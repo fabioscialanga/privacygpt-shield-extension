@@ -54,3 +54,8 @@ Il motore in `rules.js` restituisce un oggetto con:
 ## Test locale
 
 La pagina `test.html` è stata sanificata e usa solo dati dimostrativi fittizi.
+
+## Nota su modalità Manuale e Debug overlay
+
+In modalità Manuale il pulsante **🔒 Anonimizza** resta visibile anche quando il Debug overlay è attivo.
+Il pulsante viene posizionato più in alto per evitare sovrapposizioni visive con il riquadro di debug.

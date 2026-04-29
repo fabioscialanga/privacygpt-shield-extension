@@ -31,7 +31,7 @@
 
     const box = document.createElement('div');
     box.id = 'privacygpt-debug-overlay';
-    box.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483647;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:340px;line-height:1.35';
+    box.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:2147483646;background:#111827;color:#fff;font:12px Arial,sans-serif;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:340px;line-height:1.35';
     box.innerHTML = '<b>PrivacyGPT Debug</b><div id="privacygpt-debug-body">loading...</div>';
     document.documentElement.appendChild(box);
   }
@@ -71,6 +71,11 @@
     const button = createManualButton();
     const editors = getEditors();
     const show = STATE.enabled && STATE.interventionMode === 'manual' && editors.length > 0;
+
+    // The manual button must remain visible even when Debug overlay is active.
+    // Keep it above the overlay and move it higher to avoid visual overlap.
+    button.style.zIndex = '2147483647';
+    button.style.bottom = STATE.debug ? '172px' : '86px';
     button.style.display = show ? 'block' : 'none';
   }
 
